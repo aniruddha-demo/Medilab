@@ -17,7 +17,7 @@ pipeline {
 
         stage('Setup Apache Vhost on Remote Server') {
             steps {
-                sshagent (credentials: ['your-ssh-credentials-id']) {
+                sshagent (credentials: ['6a476bc9-d872-49ff-9e57-5eb6d53ff3da']) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} << 'EOF'
                     sudo mkdir -p ${DOCUMENT_ROOT}
@@ -48,7 +48,7 @@ EOF
 
         stage('Deploy Website Files with rsync') {
             steps {
-                sshagent (credentials: ['your-ssh-credentials-id']) {
+                sshagent (credentials: ['6a476bc9-d872-49ff-9e57-5eb6d53ff3da']) {
                     sh """
                     rsync -avz --exclude='.git/' --exclude='Jenkinsfile' -e "ssh -o StrictHostKeyChecking=no" ./ ${REMOTE_USER}@${REMOTE_HOST}:${DOCUMENT_ROOT}/
                     """
